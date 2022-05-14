@@ -80,8 +80,16 @@ let router = Router.infer SetPage (fun model -> model.page)
 
 type Main = Template<"wwwroot/main.html">
 
+type ViewBoxCircleSvg = Template<"wwwroot/viewBox-template.svg">
+
 let homePage model dispatch =
-    Main.Home().Elt()
+    Main.Home()
+        .DynamicSvg(
+            ViewBoxCircleSvg()
+                .CircleFill("none")
+                .CircleStroke("#000")
+                .Elt())
+        .Elt()
 
 let counterPage model dispatch =
     Main.Counter()
